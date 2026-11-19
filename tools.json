@@ -1,0 +1,294 @@
+{
+  "tools": [
+    {
+      "name": "verify_manifest",
+      "description": "Compare a list of files with a sha256 manifest and report every mismatch Free of charge.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "manifest": {
+            "type": "string",
+            "description": "Object mapping file paths to expected sha256 digests"
+          },
+          "files": {
+            "type": "object",
+            "description": "Object mapping file paths to actual sha256 digests"
+          }
+        },
+        "required": [
+          "manifest",
+          "files"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "verify manifest",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "json_schema_strict",
+      "description": "Validate JSON against a schema; returns exact error paths Free of charge.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "object",
+            "description": "JSON Schema document to validate against"
+          }
+        },
+        "required": [
+          "schema"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "json schema strict",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "ru_text_normalize",
+      "description": "Normalise Russian text (yo, quotes, dashes, spaces) and return metrics Free of charge.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Text to normalise (Russian punctuation and spacing)"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "ru text normalize",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "payment_verdict",
+      "description": "Verdict on a Base payment: paid, underpaid, wrong recipient, pending or reverted, with chain facts and a signed receipt Costs 0.01 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tx": {
+            "type": "string",
+            "description": "tx"
+          },
+          "expect_to": {
+            "type": "string",
+            "description": "expect_to"
+          },
+          "expect_amount": {
+            "type": "string",
+            "description": "expect_amount"
+          },
+          "token": {
+            "type": "string",
+            "description": "token"
+          },
+          "min_confirmations": {
+            "type": "string",
+            "description": "min_confirmations"
+          }
+        },
+        "required": [
+          "tx"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "payment verdict",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "receipt_verify",
+      "description": "Verify a receipt: canonical JSON digest and declared sha256 Costs 0.01 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "description": "Object whose canonical JSON is the signed receipt payload"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "Expected sha256 digest, hex, 64 characters"
+          }
+        },
+        "required": [
+          "payload",
+          "sha256"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "receipt verify",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "openapi_conformance",
+      "description": "Check a live API against its OpenAPI document and list mismatches Costs 0.05 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "openapi_url": {
+            "type": "string",
+            "description": "Public http(s) URL of an OpenAPI document to check"
+          }
+        },
+        "required": [
+          "openapi_url"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "openapi conformance",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "full_report",
+      "description": "One signed report: domain and mail, certificate, headers, crawl readiness, optional package Costs 0.01 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Full URL with scheme, for example https://example.com/"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "full report",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "domain_posture",
+      "description": "Mail and DNS posture: A/AAAA, MX, SPF, DMARC policy, CAA, with a verdict Costs 0.005 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name without scheme, for example example.com"
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "domain posture",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "tls_cert",
+      "description": "Certificate expiry, issuer and SAN coverage for a host, days left and verdict Costs 0.001 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "Host name without scheme, for example example.com"
+          }
+        },
+        "required": [
+          "host"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "tls cert",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "http_headers",
+      "description": "Security headers and the redirect chain, with what is missing and why it matters Costs 0.003 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Full URL with scheme, for example https://example.com/"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "http headers",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "package_check",
+      "description": "Registry check for npm or PyPI: latest version, deprecation, licence, staleness Costs 0.002 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Package name as published, for example left-pad or requests"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "package check",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "site_ready",
+      "description": "Crawl and AI readiness: robots, sitemap, llms.txt, AI-crawler blocks, response time Costs 0.005 USDC per call on Base (x402). Call it over HTTP with a PAYMENT-SIGNATURE header to actually run it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Full URL with scheme, for example https://example.com/"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": true
+      },
+      "annotations": {
+        "title": "site ready",
+        "readOnlyHint": true,
+        "openWorldHint": true
+      }
+    }
+  ]
+}

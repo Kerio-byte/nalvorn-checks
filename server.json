@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Kerio-byte/nalvorn-checks",
+  "title": "Nalvorn Checks",
+  "description": "Deterministic agent checks: manifests, schemas, payment verdicts on Base, OpenAPI drift, DNS, TLS, headers, packages, crawl readiness.",
+  "version": "1.0.0",
+  "websiteUrl": "https://tools.nalvorn.top",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tools.nalvorn.top/mcp"
+    }
+  ]
+}
